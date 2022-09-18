@@ -1,9 +1,11 @@
 ---
 - name: playbook to run docker container
   hosts: all
+  vars:
+    version: default 
   tasks:
     - name: stop existing container
-      shell: docker stop myapps
+      shell: docker stop myapps; sleep 5
 
     - name: Deploy container
-      shell: docker run -d --rm --name myapps -p 8080:8080 raiyan/sample-app:v1
+      shell: docker run -d --rm --name myapps -p 8080:8080 raiyan/sample-app:{{ version }}
