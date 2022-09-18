@@ -1,9 +1,11 @@
 ---
 - name: Docker image creation playbook
   hosts: all
+  vars:
+    version: default
   tasks:
     - name: build docker image
-      shell: docker build -t raiyan/sample-app:v1 .
+      shell: docker build -t raiyan/sample-app:{{ version }} .
       args:
         chdir: /apps
 
@@ -11,5 +13,5 @@
       shell: docker login -u raiyan -pDocker100%
 
     - name: push docker image
-      shell: docker push raiyan/sample-app:v1
+      shell: docker push raiyan/sample-app:{{ version }}
 
